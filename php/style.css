@@ -1,0 +1,35 @@
+@charset "utf-8";
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+
+/* CSS Document */
+
+body{
+	background: url(../img/04.jpg);
+	background-size: cover;
+	background-position: center center;
+	background-repeat:  no-repeat;
+	background-attachment: fixed;
+}
+
+*{
+	padding-right: auto;
+	padding-left: auto;
+	padding-top: 0px;
+}
+#login-form {
+	margin:5% auto;
+	max-width:500px;
+}
+/* home page */
+#wrapper{
+	padding-top:50px;
+}
+
+.liens{
+	color: forestgreen;
+}
+
+.liens:hover{
+	color: white;
+	text-decoration: none;
+}
