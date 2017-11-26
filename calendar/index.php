@@ -22,7 +22,7 @@ $events = $req->fetchAll();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bare - Start Bootstrap Template</title>
+    <title>Mon planning</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -285,9 +285,9 @@ $events = $req->fetchAll();
 			 data: {Event:Event},
 			 success: function(rep) {
 					if(rep == 'OK'){
-						alert('Changement effectué');
+						alert('Changement effectué.');
 					}else{
-						alert('Erreur, Réessayez'); 
+						alert('Erreur, Réessayez !'); 
 					}
 				}
 			});
