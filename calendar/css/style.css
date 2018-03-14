@@ -1,0 +1,12 @@
+body{
+  background: url(../assets/img/01.jpg);l
+	background-size: cover;
+	background-position: center center;
+	background-repeat:  no-repeat;
+	background-attachment: fixed;
+}
+
+#calendrier{
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
