@@ -1,178 +1,132 @@
 <!DOCTYPE html>
- <html>
-  <head>
+<html>
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Auto Ecole Castellane</title>
-    
-
-    <link rel="stylesheet" type="text/css"  href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css"  href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoEcole (1)</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
-  <body>
-    <div id="tf-home">
-        <div class="overlay">
-            <div id="sticky-anchor"></div>
-            <nav id="tf-menu" class="navbar navbar-default">
-                <div class="container">
-                   <div class="navbar-header">
-                       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
-                        <span class="sr-only">Menu</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                   </div>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                      <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#tf-home">Accueil</a></li>
-                        <li><a href="#tf-service">Prestations</a></li>
-                        <li><a href="#tf-contact">Contact</a></li>
-                        <li><a href="php/index.php">Inscription / Connexion</a></li>
-                        <li></li>
-                      </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="container">
-                <div class="content">
-                    <h1>Auto Ecole Castellane</h1>
-                    <h3>27 bd du Général-de-Gaulle – 83100 TOULON Cedex.</h3>
-                    <br>
-                    <a href="#tf-contact" class="btn btn-primary my-btn">Contact</a>
-                </div>
-            </div>
-        </div>
+<body>
+    <div class="d-inline">
+        <nav class="navbar navbar-light navbar-expand-md sticky-top navigation-clean-button navbar-dark">
+            <div class="container-fluid"><a class="navbar-brand" href="#" data-bs-hover-animate="tada" style="color:rgb(255,255,255);">Auto Ecole Castellane</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div
+                    class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav mx-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#prestations" data-bs-hover-animate="pulse" style="color:#fd9c00;" data-scroll="#section1">Prestations</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#btn-contact" data-bs-hover-animate="pulse" style="color:#fd9c00;">contact</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#" data-bs-hover-animate="pulse" style="color:#fd9c00;">portfolio</a>
+                            <div class="dropdown-menu" role="menu" id="dropdown-menu"><a class="dropdown-item" role="presentation" href="https://portfolio-axel-hadida.fr/">Axel hadida</a><a class="dropdown-item" role="presentation" href="http://xn--portfolio-mederick-planon-ghc.fr/">mederick plançon</a><a class="dropdown-item"
+                                    role="presentation" href="#">oumar akram</a></div>
+                        </li>
+                    </ul><span class="navbar-text actions"> <a href="php/index.php" class="login" style="color:rgb(255,255,255);">Se Connecter</a><a class="btn btn-light action-button" role="button" href="php/register.php" data-bs-hover-animate="jello" style="background-color:rgb(254,155,0);">S'inscrire</a></span></div>
     </div>
-
-    <div id="tf-service">
-        <div class="container">
-
-            <div class="col-md-4">
-
-                <div class="media">
-                  <div class="media-left media-middle">
-                    <i class="fa fa-motorcycle"></i>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading">Permis Moto</h4>
-                    <p>Les formations Scooter / Moto 
-                       Forfait 125/AM à partir de 256€
-                       Forfait moto permis A à partir de 570€ </p>
-                    <p>Heure de conduite supplémentaire à 42€</p>
-                  </div>
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="media">
-                  <div class="media-left media-middle">
-                    <i class="fa fa-car"></i>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading">Permis Auto</h4>
-                    <p>Des formations innovantes, performantes et incroyablement flexiblesForfait Code + 20H de conduite à partir de 1100 € </p>
-                    <p> Heure de conduite supplémentaire à 42€</p>
-                  </div>
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="media">
-                  <div class="media-left media-middle">
-                    <div><i class="fa fa-heartbeat"></i></div>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading">Une formation flexible</h4>
-                    <p>Une formation intégralement en ligne ou dans nos locaux
-                     Réservez vos cours de conduite en ligne</p>
-
-                    <p>Des cours de conduite proches de chez vous.</p>
-                    <p>Réservez vos cours de conduite en ligne
-                    7 circuits motos disponibles </p>
-                  </div>
-                </div>
-
-            </div>
-            
-        </div>
-    </div>
-
-    <div id="tf-why-me">
-        <div class="overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Qui Sommes Nous ?</h3>
-                        <br>
-                        <ul class="list-inline why-me">
-                            <li>
-                                <p>Auto Ecole Castellane est un acteur incontournable sur le marché de l’apprentissage de la conduite Auto- Moto depuis 1986 et connu grâce à son taux de réussite élévé aux examens.</p>
-                            </li>
-                            <li>
-                                <p>Nos apprentissages s’appuient sur le programme de formation, REMC , (matrice GDE) qui intègre les aspects comportementaux dans la pédagogie de l’enseignement de la conduite et de la sécurité routière.</p>
-                            </li>
-                            <li>
-                                <p>Nos équipes pédagogiques compétentes et sympathiques mettront tout en œuvre pour satisfaire vos obligations, vous aider à préparer vos projets et conduire un véhicule de façon autonome et apaisé.</p>
-                            </li>
-                        </ul>
-                        <a href="#tf-contact" class="btn btn-primary my-btn dark">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="tf-contact">
-        <div class="container">
-            <div class="section-title">
-                <h3>Contactez Nous</h3>
-                <p> N'hesitez pas à nous contacter et nous aurons le plaisir de vous répondre dans les meilleurs delais ! </p>
-                <hr>
-            </div>
-
-            <div class="space"></div>
-
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <form id="contact">
-                      <div class="form-group">
-                        <input type="Nom" class="form-control"  placeholder="Nom">
-                      </div>
-                      <div class="form-group">
-                        <input type="Email" class="form-control"  placeholder="Entrez votre Email">
-                      </div>
-                      <div class="form-group">
-                        <textarea class="form-control" rows="4" placeholder="Message"></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary my-btn dark">SOUMETTRE</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav id="tf-footer">
-        <div class="container">
-             <div class="pull-left">
-            </div>
-            <div class="pull-right"> 
-                <ul class="social-media list-inline">
-                    <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                    <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                    <li><a href="#"><span class="fa fa-pinterest"></span></a></li>
-                    <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                </ul>
-            </div>
-        </div>
     </nav>
- </body>
+    </div>
+    <section data-bs-parallax-bg="true" id="Section1" style="background-image:url(&quot;assets/img/01.jpg&quot;);height:900px;background-repeat:no-repeat;background-size:auto;">
+        <h1 id="heading1" class="text-center" data-aos="fade-down" data-aos-duration="1000">Auto Ecole Castellane</h1>
+        <h1 id="heading2" class="text-center" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="500">Permis Auto | Permis Moto</h1>
+    </section>
+    <div class="features-clean">
+        <div class="container">
+            <div class="row features" id="prestations" style="padding-top:100px;padding-bottom:50px;">
+                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300">
+                    <h3 class="name"><strong>Permis Moto</strong><i class="fa fa-motorcycle icon"></i><br></h3>
+                    <p class="description">Les formations Scooter / Moto Forfait 125/AM à partir de 256€ Forfait moto permis A à partir de 570€. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Heure de conduite supplémentaire à 42€<br><br></p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="400"><i class="fa fa-car icon"></i>
+                    <h3 class="name"><strong>Permis Auto</strong><br></h3>
+                    <p class="description">Des formations innovantes, performantes et incroyablement flexiblesForfait Code + 20H de conduite à partir de 1100 €. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Heure de conduite supplémentaire à 42€<br><br></p>
+                </div>
+                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="500"><i class="fa fa-heartbeat icon"></i>
+                    <h3 class="name"><strong>Une formation flexible</strong><br></h3>
+                    <p class="description">Une formation intégralement en ligne ou dans nos locaux Réservez vos cours de conduite en ligne. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Des
+                        cours de conduite proches de chez vous. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Réservez vos cours de conduite en ligne 7 circuits motos disponibles<br><br></p>
+                </div>
+                <div class="col">
+                    <div class="modal fade" role="dialog" tabindex="-1" id="modal1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Nous Contacter</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                                <div class="modal-body">
+                                    <form method="post">
+                                        <div class="form-group"><input type="text" name="name" placeholder="Nom" class="form-control" /></div>
+                                        <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"><small class="form-text text-danger" id="error">Entrez une adresse email valide.</small></div>
+                                        <div class="form-group"><textarea class="form-control" rows="14" name="message" placeholder="Message"></textarea></div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Fermer</button><button class="btn btn-primary" type="submit" id="btn-modal">Envoyer</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="Section2">
+        <div class="container">
+            <h2 data-aos="fade-right" data-aos-duration="500" data-aos-delay="300" id="who">Qui Sommes Nous ?<br></h2>
+            <p class="text-justify" data-aos="fade-right" data-aos-duration="500" data-aos-delay="400" id="text">Auto Ecole Castellane est un acteur incontournable sur le marché de l’apprentissage de la conduite Auto- Moto depuis 1986 et connu grâce à son taux de réussite élévé aux examens.<br></p>
+            <p class="text-justify" data-aos="fade-right" data-aos-duration="500"
+                data-aos-delay="500" id="text">Nos apprentissages s’appuient sur le programme de formation, REMC , (matrice GDE) qui intègre les aspects comportementaux dans la pédagogie de l’enseignement de la conduite et de la sécurité routière.<br></p>
+            <p class="text-justify" data-aos="fade-right"
+                data-aos-duration="500" data-aos-delay="600" id="text">Nos équipes pédagogiques compétentes et sympathiques mettront tout en œuvre pour satisfaire vos obligations, vous aider à préparer vos projets et conduire un véhicule de façon autonome et apaisé.<br></p><button class="btn btn-primary" type="button"
+                data-aos="fade-right" data-aos-duration="500" data-aos-delay="700" id="btn-contact" data-toggle="modal" data-target="#modal1">Contactez Nous !</button></div>
+    </section>
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Legacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Careers</h3>
+                        <ul>
+                            <li><a href="#">Job openings</a></li>
+                            <li><a href="#">Employee success</a></li>
+                            <li><a href="#">Benefits</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                        <p class="copyright">Auto Ecole Castellane © 2018</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/12.1.5/js/smooth-scroll.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
 </html>

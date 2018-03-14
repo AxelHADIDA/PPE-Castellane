@@ -1,302 +1,192 @@
 <?php
-require_once('bdd.php');
+session_start();
+include("dbconn.php");
+if(!isset($_SESSION['user']))
+{
+    $_SESSION['user'] = session_id();
+}
+$uid = $_SESSION['user'];  // set your user id settings
+$datetime_string = date('c',time());
 
+if(isset($_POST['action']) or isset($_GET['view']))
+{
+    if(isset($_GET['view']))
+    {
+        header('Content-Type: application/json');
+        $start = mysqli_real_escape_string($connection,$_GET["start"]);
+        $end = mysqli_real_escape_string($connection,$_GET["end"]);
 
-$sql = "SELECT id, title, start, end, color FROM events ";
-
-$req = $bdd->prepare($sql);
-$req->execute();
-
-$events = $req->fetchAll();
+        $result = mysqli_query($connection,"SELECT `id`, `start` ,`end` ,`title` FROM  `events` where (date(start) >= '$start' AND date(start) <= '$end') and uid='".$uid."'");
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $events[] = $row;
+        }
+        echo json_encode($events);
+        exit;
+    }
+    elseif($_POST['action'] == "add")
+    {
+        mysqli_query($connection,"INSERT INTO `events` (
+                    `title` ,
+                    `start` ,
+                    `end` ,
+                    `uid`
+                    )
+                    VALUES (
+                    '".mysqli_real_escape_string($connection,$_POST["title"])."',
+                    '".mysqli_real_escape_string($connection,date('Y-m-d H:i:s',strtotime($_POST["start"])))."',
+                    '".mysqli_real_escape_string($connection,date('Y-m-d H:i:s',strtotime($_POST["end"])))."',
+                    '".mysqli_real_escape_string($connection,$uid)."'
+                    )");
+        header('Content-Type: application/json');
+        echo '{"id":"'.mysqli_insert_id($connection).'"}';
+        exit;
+    }
+    elseif($_POST['action'] == "update")
+    {
+        mysqli_query($connection,"UPDATE `events` set
+            `start` = '".mysqli_real_escape_string($connection,date('Y-m-d H:i:s',strtotime($_POST["start"])))."',
+            `end` = '".mysqli_real_escape_string($connection,date('Y-m-d H:i:s',strtotime($_POST["end"])))."'
+            where uid = '".mysqli_real_escape_string($connection,$uid)."' and id = '".mysqli_real_escape_string($connection,$_POST["id"])."'");
+        exit;
+    }
+    elseif($_POST['action'] == "delete")
+    {
+        mysqli_query($connection,"DELETE from `events` where uid = '".mysqli_real_escape_string($connection,$uid)."' and id = '".mysqli_real_escape_string($connection,$_POST["id"])."'");
+        if (mysqli_affected_rows($connection) > 0) {
+            echo "1";
+        }
+        exit;
+    }
+}
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="Fr"><head>
+    <title>jQuery Fullcalendar Integration with Bootstrap, PHP & MySQL | PHPLift.net</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <style type="text/css">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Mon planning</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- FullCalendar -->
-	<link href='css/fullcalendar.css' rel='stylesheet' />
-
-
-    <!-- Custom CSS -->
-    <style>
-    body {
-        padding-top: 70px;
-        background: url(../img/04.jpg);
-		background-size: cover;
-		background-position: center center;
-		background-repeat:  no-repeat;
-		background-attachment: fixed;
-    }
-	#calendar {
-		max-width: 800px;
-	}
-	.col-centered{
-		float: none;
-		margin: 0 auto;
-	}
+      img {border-width: 0}
+      * {font-family:'Lucida Grande', sans-serif;}
     </style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 
-</head>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="css/fullcalendar.css" rel="stylesheet" />
+    <link href="css/fullcalendar.print.css" rel="stylesheet" media="print" />
+    <script src="js/moment.min.js"></script>
+    <script src="js/fullcalendar.js"></script>
 
-<body>
 
-    <!-- Navigation -->
-    <!-- Page Content -->
+  </head>
+  <body  >
+<!-- add calander in this div -->
+
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="brand" class="navbar-brand" href="../index.html">Auto Ecole Castellane</a>
+      </div>
 
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>Planning Heure Conduite</h1>
-                <p class="lead">Choisissez vos heures de cours.</p>
-                <button type="button" class="btn btn-default"><a href="../php/home.php">Retourner vers profil</a></button>                
-                <br><br>
-                <div id="calendar" class="col-centered">
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="../php/logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Se déconnecter</a></li>
+              <li><a href="../php/home.php">Retour vers mon portail</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+<div id="calendrier" class="container">
+  <div class="row">
+<div id="calendar"></div>
+
+</div>
+</div>
+
+
+<!-- Modal -->
+<div id="createEventModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ajouter Heure de conduite</h4>
+      </div>
+      <div class="modal-body">
+            <div class="control-group">
+                <label class="control-label" for="inputPatient">Nom:</label>
+                <div class="field desc">
+                    <input class="form-control" id="title" name="title" placeholder="Event" type="text" value="">
                 </div>
             </div>
-			
+
+            <input type="hidden" id="startTime"/>
+            <input type="hidden" id="endTime"/>
+
+
+
+        <div class="control-group">
+            <label class="control-label" for="when">Horaire:</label>
+            <div class="controls controls-row" id="when" style="margin-top:5px;">
+            </div>
         </div>
-        <!-- /.row -->
-		
-		<!-- Modal -->
-		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			<form class="form-horizontal" method="POST" action="addEvent.php">
-			
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Ajouter Heure de conduite</h4>
-			  </div>
-			  <div class="modal-body">
-				
-				  <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Titre</label>
-					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title" placeholder="Titre">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Label</label>
-					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color">
-						  <option value="">Choisir</option>
-						  <option style="color:#0071c5;" value="#0071c5">&#9724; Bleu Foncé</option>
-						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-						  <option style="color:#008000;" value="#008000">&#9724; Vert</option>						  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Jaune</option>
-						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rouge</option>
-						  <option style="color:#000;" value="#000">&#9724; Noir</option>
-						  
-						</select>
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="start" class="col-sm-2 control-label">Début</label>
-					<div class="col-sm-10">
-					  <input type="text" name="start" class="form-control" id="start" readonly>
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="end" class="col-sm-2 control-label">Fin</label>
-					<div class="col-sm-10">
-					  <input type="text" name="end" class="form-control" id="end" readonly>
-					</div>
-				  </div>
-				
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-				<button type="submit" class="btn btn-success">Enregistrer</button>
-			  </div>
-			</form>
-			</div>
-		  </div>
-		</div>
-		
-		
-		
-		<!-- Modal -->
-		<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			<form class="form-horizontal" method="POST" action="editEventTitle.php">
-			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Modifier Heure de conduite</h4>
-			  </div>
-			  <div class="modal-body">
-				
-				  <div class="form-group">
-					<label for="title" class="col-sm-2 control-label">Titre</label>
-					<div class="col-sm-10">
-					  <input type="text" name="title" class="form-control" id="title" placeholder="Titre">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label for="color" class="col-sm-2 control-label">Label</label>
-					<div class="col-sm-10">
-					  <select name="color" class="form-control" id="color">
-						  <option value="">Choisir</option>
-						  <option style="color:#0071c5;" value="#0071c5">&#9724; Bleu foncé</option>
-						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-						  <option style="color:#008000;" value="#008000">&#9724; Vert</option>						  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Jaune</option>
-						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-						  <option style="color:#FF0000;" value="#FF0000">&#9724; Rouge</option>
-						  <option style="color:#000;" value="#000">&#9724; Noir</option>
-						  
-						</select>
-					</div>
-				  </div>
-				    <div class="form-group"> 
-						<div class="col-sm-offset-2 col-sm-10">
-						  <div class="checkbox">
-							<label class="text-danger"><input type="checkbox"  name="delete">Supprimer heure de conduite</label>
-						  </div>
-						</div>
-					</div>
-				  
-				  <input type="hidden" name="id" class="form-control" id="id">
-				
-				
-			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-				<button type="submit" class="btn btn-success">Enregistrer</button>
-			  </div>
-			</form>
-			</div>
-		  </div>
-		</div>
 
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+        <button type="submit" class="btn btn-primary" id="submitButton">Enregistrer</button>
     </div>
-    <!-- /.container -->
+    </div>
 
-    <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
+  </div>
+</div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-	
-	<!-- FullCalendar -->
-	<script src='js/moment.min.js'></script>
-	<script src='js/fullcalendar.min.js'></script>
-	
-	<script>
 
-	$(document).ready(function() {
-		
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,basicWeek,basicDay'
-			},
-			defaultDate: '2017-11-08',
-			editable: true,
-			eventLimit: true, // allow "more" link when too many events
-			selectable: true,
-			selectHelper: true,
-			select: function(start, end) {
-				
-				$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-				$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-				$('#ModalAdd').modal('show');
-			},
-			eventRender: function(event, element) {
-				element.bind('dblclick', function() {
-					$('#ModalEdit #id').val(event.id);
-					$('#ModalEdit #title').val(event.title);
-					$('#ModalEdit #color').val(event.color);
-					$('#ModalEdit').modal('show');
-				});
-			},
-			eventDrop: function(event, delta, revertFunc) { // si changement de position
+<div id="calendarModal" class="modal fade">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Détail Heure de conduite</h4>
+        </div>
+        <div id="modalBody" class="modal-body">
+        <h4 id="modalTitle" class="modal-title"></h4>
+        <div id="modalWhen" style="margin-top:5px;"></div>
+        </div>
+        <input type="hidden" id="eventID"/>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+            <button type="submit" class="btn btn-danger" id="deleteButton">Supprimer</button>
+        </div>
+    </div>
+</div>
+</div>
+<!--Modal-->
 
-				edit(event);
 
-			},
-			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
-
-				edit(event);
-
-			},
-			events: [
-			<?php foreach($events as $event): 
-			
-				$start = explode(" ", $event['start']);
-				$end = explode(" ", $event['end']);
-				if($start[1] == '00:00:00'){
-					$start = $start[0];
-				}else{
-					$start = $event['start'];
-				}
-				if($end[1] == '00:00:00'){
-					$end = $end[0];
-				}else{
-					$end = $event['end'];
-				}
-			?>
-				{
-					id: '<?php echo $event['id']; ?>',
-					title: '<?php echo $event['title']; ?>',
-					start: '<?php echo $start; ?>',
-					end: '<?php echo $end; ?>',
-					color: '<?php echo $event['color']; ?>',
-				},
-			<?php endforeach; ?>
-			]
-		});
-		
-		function edit(event){
-			start = event.start.format('YYYY-MM-DD HH:mm:ss');
-			if(event.end){
-				end = event.end.format('YYYY-MM-DD HH:mm:ss');
-			}else{
-				end = start;
-			}
-			
-			id =  event.id;
-			
-			Event = [];
-			Event[0] = id;
-			Event[1] = start;
-			Event[2] = end;
-			
-			$.ajax({
-			 url: 'editEventDate.php',
-			 type: "POST",
-			 data: {Event:Event},
-			 success: function(rep) {
-					if(rep == 'OK'){
-						alert('Changement effectué.');
-					}else{
-						alert('Erreur, Réessayez !'); 
-					}
-				}
-			});
-		}
-		
-	});
-
-</script>
-
-</body>
-
+<div style='margin-left: auto;margin-right: auto;text-align: center;'>
+</div>
+  </body>
 </html>

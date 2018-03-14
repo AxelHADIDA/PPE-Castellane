@@ -4,7 +4,7 @@
 /* CSS Document */
 
 body{
-	background: url(../img/04.jpg);
+	background: url(../assets/img/01.jpg);l
 	background-size: cover;
 	background-position: center center;
 	background-repeat:  no-repeat;
@@ -26,10 +26,14 @@ body{
 }
 
 .liens{
-	color: forestgreen;
+	color: #000;
 }
 
 .liens:hover{
-	color: white;
+	color: #000;
 	text-decoration: none;
+}
+
+#btn-logreg{
+	background-color: #fd9c00;
 }
