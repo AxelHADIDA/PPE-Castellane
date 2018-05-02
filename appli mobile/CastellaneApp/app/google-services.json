@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "297016842655",
+    "firebase_url": "https://castellaneapp.firebaseio.com",
+    "project_id": "castellaneapp",
+    "storage_bucket": "castellaneapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297016842655:android:f03a4991e2ffffb0",
+        "android_client_info": {
+          "package_name": "com.example.axel.castellaneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297016842655-8hv9fqv2vvs4q8pulcprd74eq80rsj4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.axel.castellaneapp",
+            "certificate_hash": "3063fad20e60ece1c0f8d589a6d31f3ea765c0b1"
+          }
+        },
+        {
+          "client_id": "297016842655-4q34d85m4tg9bhres2cq59k3cb7keoeo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDArOhbazFsg79LW_NyIr1bjbuKB_mMlVA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297016842655-4q34d85m4tg9bhres2cq59k3cb7keoeo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
